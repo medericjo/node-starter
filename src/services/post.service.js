@@ -37,11 +37,18 @@ exports.createPost = async (postData) => {
 
 exports.updatePost = async (id, postData) => {
   const post = await Post.findByPk(id)
+  
   if (!post) {
     throw new Error('Post not found')
   }
+
+  // Check if userId matches post's userId
+  if (postData.userId && postData.userId !== post.userId) {
+    throw new Error('Unauthorized: User ID does not match post owner')
+  }
+
   await post.update(postData)
-  return post
+  return this.getPostById(post.id) // Return with user association
 }
 
 exports.deletePost = async (id) => {

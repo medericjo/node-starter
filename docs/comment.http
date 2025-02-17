@@ -1,27 +1,26 @@
-GET http://localhost:3000/api/posts
+GET http://localhost:3000/api/comments
 
 ###
-GET http://localhost:3000/api/posts/:id
+GET http://localhost:3000/api/comments/:id
 
 ###
-POST http://localhost:3000/api/posts
+POST http://localhost:3000/api/comments
 Content-Type: application/json
-
+ 
 {
-  "title": "Le petit prince",
   "content": "Lorem ipsum odor amet, consectetuer adipiscing elit. Felis bibendum praesent mus fringilla tortor volutpat.",
-  "userId": "142a4a3e-0a9a-432b-ab00-faa070e7f0b2"
+  "postId": "",
+  "userId": ""
 }
 
 ###
-PUT http://localhost:3000/api/posts/:id
+PUT http://localhost:3000/api/comments/:id
 Content-Type: application/json
 
 {
-  "title": "Le petit prince",
   "content": "Lorem ipsum odor amet, consectetuer adipiscing elit. Felis bibendum praesent mus fringilla tortor volutpat.",
   "userId": "0"
 }
 
 ###
-DELETE http://localhost:3000/api/posts/:id
+DELETE http://localhost:3000/api/comments/:id
