@@ -7,6 +7,8 @@ const { customMiddleware } = require('./src/middlewares/custom.middleware')
 // Routes
 const userRoutes = require('./src/routes/user.route')
 const postRoutes = require('./src/routes/post.route')
+const commentRoutes = require('./src/routes/comment.route')
+const replyRoutes = require('./src/routes/reply.route')
 
 dotenv.config()
 
@@ -22,6 +24,8 @@ app.use(customMiddleware)
 // Set application routes
 app.use('/api/users', userRoutes)
 app.use('/api/posts', postRoutes)
+app.use('/api/comments', commentRoutes)
+app.use('/api/replies', replyRoutes)
 
 const port = process.env.PORT || 3000
 

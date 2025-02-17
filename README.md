@@ -76,8 +76,8 @@ The server will start on `http://localhost:3000`
 ## Scripts
 
 - `npm run start:dev` - Start development server with nodemon
-- `npm run sync` - Sync database schema
-- `npm run seed` - Seed database with initial data
+- `npm run db:sync` - Sync database schema
+- `npm run db:seed` - Seed database with initial data
 
 ## Environment Variables
 
