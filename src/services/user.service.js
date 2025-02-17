@@ -1,12 +1,24 @@
-const User = require('../models/user.model')
+const { User, Post } = require('../models/index')
 
 exports.getUsers = async () => {
-  const users = await User.findAll()
+  const users = await User.findAll({
+    include: [{
+      model: Post,
+      as: 'post',
+      attributes: ['title', 'content']
+    }]
+  })
   return users
 }
 
 exports.getUserById = async (id) => {
-  const user = await User.findByPk(id)
+  const user = await User.findByPk(id, {
+    include: [{
+      model: Post,
+      as: 'post',
+      attributes: ['title', 'content']
+    }]
+  })
   if (!user) {
     throw new Error('User not found')
   }
@@ -14,28 +26,34 @@ exports.getUserById = async (id) => {
 }
 
 exports.getUserByEmail = async (email) => {
-  const user = await User.findOne({ where: { email } })
+  const user = await User.findOne({ where: { email } }, {
+    include: [{
+      model: Post,
+      as: 'post',
+      attributes: ['title', 'content']
+    }]
+  })
   if (!user) {
     throw new Error('User not found')
   }
   return user
 }
 
-exports.createUser = async (user) => {
-  try {
-    const newUser = await User.create(user)
-    return newUser
-  } catch (error) {
-    throw new Error('Failed to create user')
+exports.createUser = async (userData) => {
+  const existingUser = await User.findOne({ where: { email: userData.email } })
+  if (existingUser) {
+    throw new Error('User already exists')
   }
+  const newUser = await User.create(userData)
+  return newUser
 }
 
-exports.updateUser = async (id, user) => {
+exports.updateUser = async (id, userData) => {
   const existingUser = await User.findByPk(id)
   if (!existingUser) {
     throw new Error('User not found')
   }
-  await existingUser.update(user)
+  await existingUser.update(userData)
   return existingUser
 }
 
