@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon app.js",
-    "sync": "node src/database/sync.js",
-    "seed": "node src/database/seed.js"
+    "db:sync": "node src/database/sync.js",
+    "db:seed": "node src/database/seed.js"
   },
   "author": "medericjo",
   "license": "ISC",

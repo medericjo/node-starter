@@ -1,0 +1,26 @@
+GET http://localhost:3000/api/posts
+
+###
+GET http://localhost:3000/api/posts/:id
+
+###
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+  "title": "Le petit prince",
+  "content": "Lorem ipsum odor amet, consectetuer adipiscing elit. Felis bibendum praesent mus fringilla tortor volutpat.",
+  "userId": "142a4a3e-0a9a-432b-ab00-faa070e7f0b2"
+}
+
+###
+PUT http://localhost:3000/api/posts/:id
+Content-Type: application/json
+
+{
+  "title": "Le petit prince",
+  "content": "Lorem ipsum odor amet, consectetuer adipiscing elit. Felis bibendum praesent mus fringilla tortor volutpat."
+}
+
+###
+DELETE http://localhost:3000/api/posts/:id

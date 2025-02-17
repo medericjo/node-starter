@@ -1,5 +1,5 @@
 const sequelize = require('../config/database')
-const User = require('../models/user.model')
+const User = require('../models/index')
 
 const seedUsers = async () => {
   await User.create({
