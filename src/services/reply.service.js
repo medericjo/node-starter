@@ -2,35 +2,43 @@ const { Reply, Post, Comment, User } = require('../models')
 
 exports.getReplies = async () => {
   const replies = await Reply.findAll({
-    include: [{
-      model: Post,
-      as: 'post' 
-    }, {
-      model: Comment,
-      as: 'comment'
-    }, {
-      model: User,
-      as: 'user'
-    }],
+    include: [
+      {
+        model: User,
+        as: 'user',
+      },
+      {
+        model: Post,
+        as: 'post',
+      },
+      {
+        model: Comment,
+        as: 'comment',
+      },
+    ],
   })
   return replies
 }
 
-exports.getReplyById = async (id) => {
+exports.getReplyById = async id => {
   const reply = await Reply.findByPk(id, {
     include: [
       {
-        include: [{
-          model: Post,
-          as: 'post' 
-        }, {
-          model: Comment,
-          as: 'comment'
-        }, {
-          model: User,
-          as: 'user'
-        }],
-      }
+        include: [
+          {
+            model: Post,
+            as: 'post',
+          },
+          {
+            model: Comment,
+            as: 'comment',
+          },
+          {
+            model: User,
+            as: 'user',
+          },
+        ],
+      },
     ],
   })
   if (!reply) {
@@ -39,7 +47,7 @@ exports.getReplyById = async (id) => {
   return reply
 }
 
-exports.createReply = async (replyData) => {
+exports.createReply = async replyData => {
   if (!replyData.commentId) {
     throw new Error('Comment ID is required')
   }
@@ -54,7 +62,7 @@ exports.createReply = async (replyData) => {
 
 exports.updateReply = async (id, replyData) => {
   const reply = await Reply.findByPk(id)
-  
+
   if (!reply) {
     throw new Error('Reply not found')
   }
@@ -67,11 +75,11 @@ exports.updateReply = async (id, replyData) => {
   return this.getReplyById(reply.id)
 }
 
-exports.deleteReply = async (id) => {
+exports.deleteReply = async id => {
   const reply = await Reply.findByPk(id)
   if (!reply) {
     throw new Error('Reply not found')
   }
   await reply.destroy()
-  return true
+  return { message: 'Reply deleted successfully' }
 }

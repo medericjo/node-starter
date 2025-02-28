@@ -2,22 +2,26 @@ const { User, Post } = require('../models/index')
 
 exports.getUsers = async () => {
   const users = await User.findAll({
-    include: [{
-      model: Post,
-      as: 'post',
-      attributes: ['title', 'content']
-    }]
+    include: [
+      {
+        model: Post,
+        as: 'posts',
+        attributes: ['title', 'content'],
+      },
+    ],
   })
   return users
 }
 
-exports.getUserById = async (id) => {
+exports.getUserById = async id => {
   const user = await User.findByPk(id, {
-    include: [{
-      model: Post,
-      as: 'post',
-      attributes: ['title', 'content']
-    }]
+    include: [
+      {
+        model: Post,
+        as: 'posts',
+        attributes: ['title', 'content'],
+      },
+    ],
   })
   if (!user) {
     throw new Error('User not found')
@@ -25,21 +29,26 @@ exports.getUserById = async (id) => {
   return user
 }
 
-exports.getUserByEmail = async (email) => {
-  const user = await User.findOne({ where: { email } }, {
-    include: [{
-      model: Post,
-      as: 'post',
-      attributes: ['title', 'content']
-    }]
-  })
+exports.getUserByEmail = async email => {
+  const user = await User.findOne(
+    { where: { email } },
+    {
+      include: [
+        {
+          model: Post,
+          as: 'posts',
+          attributes: ['title', 'content'],
+        },
+      ],
+    }
+  )
   if (!user) {
     throw new Error('User not found')
   }
   return user
 }
 
-exports.createUser = async (userData) => {
+exports.createUser = async userData => {
   const existingUser = await User.findOne({ where: { email: userData.email } })
   if (existingUser) {
     throw new Error('User already exists')
@@ -57,11 +66,11 @@ exports.updateUser = async (id, userData) => {
   return existingUser
 }
 
-exports.deleteUser = async (id) => {
+exports.deleteUser = async id => {
   const user = await User.findByPk(id)
   if (!user) {
     throw new Error('User not found')
   }
   await user.destroy()
-  return user
+  return { message: 'User deleted successfully' }
 }

@@ -3,10 +3,9 @@ const Post = require('./post.model')
 const Comment = require('./comment.model')
 const Reply = require('./reply.model')
 
-// Define associations
+// Define models associations
 User.hasMany(Post, { foreignKey: 'userId', as: 'posts' })
 Post.belongsTo(User, { foreignKey: 'userId', as: 'user' })
-
 Comment.belongsTo(Post, { foreignKey: 'postId', as: 'post' })
 Comment.belongsTo(User, { foreignKey: 'userId', as: 'user' })
 Comment.hasMany(Reply, { foreignKey: 'commentId', as: 'replies' })

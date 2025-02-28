@@ -13,12 +13,11 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/api/users/:id
+PUT http://localhost:3000/api/users/456c0d08-c737-4eb5-a2fa-3332e6d6e2cf
 Content-Type: application/json
 
 {
-  "name": "Jane Marino",
-  "email": "jane.marino@example.com"
+  "name": "John Dalembert"
 }
 
 ###

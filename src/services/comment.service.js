@@ -2,38 +2,46 @@ const { User, Post, Comment, Reply } = require('../models')
 
 exports.getComments = async () => {
   const comments = await Comment.findAll({
-    include: [{
-      model: Post,
-      as: 'post',
-      attributes: ['id', 'title']
-    }, {
-      model: Reply,
-      as: 'replies',
-      attributes: ['id', 'content']
-    }, {
-      model: User,
-      as: 'user',
-      attributes: ['id', 'name', 'email']
-    },]
+    include: [
+      {
+        model: User,
+        as: 'user',
+        attributes: ['id', 'name', 'email'],
+      },
+      {
+        model: Post,
+        as: 'post',
+        attributes: ['id', 'title'],
+      },
+      {
+        model: Reply,
+        as: 'replies',
+        attributes: ['id', 'content'],
+      },
+    ],
   })
   return comments
 }
 
-exports.getCommentById = async (id) => {
+exports.getCommentById = async id => {
   const comment = await Comment.findByPk(id, {
-    include: [{
-      model: Post,
-      as: 'post',
-      attributes: ['id', 'title']
-    }, {
-      model: Reply,
-      as: 'replies',
-      attributes: ['id', 'content']
-    }, {
-      model: User,
-      as: 'user',
-      attributes: ['id', 'name', 'email']
-    },]
+    include: [
+      {
+        model: Post,
+        as: 'post',
+        attributes: ['id', 'title'],
+      },
+      {
+        model: Reply,
+        as: 'replies',
+        attributes: ['id', 'content'],
+      },
+      {
+        model: User,
+        as: 'user',
+        attributes: ['id', 'name', 'email'],
+      },
+    ],
   })
   if (!comment) {
     throw new Error('Comment not found')
@@ -41,7 +49,7 @@ exports.getCommentById = async (id) => {
   return comment
 }
 
-exports.createComment = async (commentData) => {
+exports.createComment = async commentData => {
   if (!commentData.postId) {
     throw new Error('Post ID is required')
   }
@@ -56,7 +64,7 @@ exports.createComment = async (commentData) => {
 
 exports.updateComment = async (id, commentData) => {
   const comment = await Comment.findByPk(id)
-  
+
   if (!comment) {
     throw new Error('Comment not found')
   }
@@ -69,11 +77,11 @@ exports.updateComment = async (id, commentData) => {
   return this.getCommentById(comment.id)
 }
 
-exports.deleteComment = async (id) => {
+exports.deleteComment = async id => {
   const comment = await Comment.findByPk(id)
   if (!comment) {
     throw new Error('Comment not found')
   }
   await comment.destroy()
-  return true
+  return { message: 'Comment deleted successfully' }
 }
