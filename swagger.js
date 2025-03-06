@@ -7,11 +7,6 @@ const swaggerDefinition = {
     version: "1.0.0",
     description: "My API Description",
   },
-  servers: [
-    {
-      url: "http://localhost:3000",
-    },
-  ],
 };
 
 const options = {
