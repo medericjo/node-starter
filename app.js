@@ -3,8 +3,8 @@ const cors = require('cors')
 const dotenv = require('dotenv')
 
 // Swagger
-const swaggerUI = require('swagger-ui-express')
 const swaggerSpec = require('./swagger')
+const { apiReference } = require('@scalar/express-api-reference')
 
 const { customMiddleware } = require('./src/middlewares/custom.middleware')
 
@@ -18,10 +18,13 @@ app.use(express.json()) // Permit to read JSON
 app.use(express.urlencoded({ extended: true })) // Permit to read URL encoded data
 
 app.use(
-  "/api-docs",
-  swaggerUI.serve,
-  swaggerUI.setup(swaggerSpec, { explorer: true })
-);
+  '/reference',
+  apiReference({
+    spec: {
+      content: swaggerSpec,
+    }
+  })
+)
 
 app.use(customMiddleware)
 
