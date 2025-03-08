@@ -1,40 +1,42 @@
-const express = require('express')
-const cors = require('cors')
-const dotenv = require('dotenv')
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+// Documentation
+import { swaggerSpec } from './swagger.js';
+import { apiReference } from '@scalar/express-api-reference';
 
-// Swagger
-const swaggerSpec = require('./swagger')
-const { apiReference } = require('@scalar/express-api-reference')
 
-const { customMiddleware } = require('./src/middlewares/custom.middleware')
+// Custom middleware
+import { customMiddleware } from './src/middlewares/custom.middleware.js';
 
-dotenv.config()
+// Routes
+import userRoutes from './src/routes/user.route.js';
 
-const app = express()
+dotenv.config();
+
+const app = express();
 
 // Middlewares
-app.use(cors())
-app.use(express.json()) // Permit to read JSON
-app.use(express.urlencoded({ extended: true })) // Permit to read URL encoded data
+app.use(cors());
+app.use(express.json()); // Permit to read JSON
+app.use(express.urlencoded({ extended: true })); // Permit to read URL encoded data
 
 app.use(
-  '/reference',
+  '/api-reference',
   apiReference({
     spec: {
       content: swaggerSpec,
-    }
+    },
   })
-)
+);
 
-app.use(customMiddleware)
+app.use(customMiddleware);
 
 // Routes
-const userRoutes = require('./src/routes/user.route')
+app.use('/api/users', userRoutes);
 
-app.use('/api/users', userRoutes)
-
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`)
-})
+  console.log(`Server is running on port ${port}`);
+});

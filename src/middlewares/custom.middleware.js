@@ -1,4 +1,4 @@
-exports.customMiddleware = (req, res, next) => {
-  console.log('Hello from custom middleware.')
-  next()
-}
+export const customMiddleware = (req, res, next) => {
+  // Your middleware logic here
+  next();
+};

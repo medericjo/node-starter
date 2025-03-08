@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize')
+import { Sequelize } from 'sequelize'
 
 /**
  * Database configuration using Sequelize ORM
@@ -39,4 +39,4 @@ const sequelize = new Sequelize({
   storage: './src/database/database.sqlite'
 })
 
-module.exports = sequelize
+export default sequelize
