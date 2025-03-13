@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 // Documentation
-import { swaggerSpec } from './swagger.js';
+import swaggerSpec from './swagger.js';
 import { apiReference } from '@scalar/express-api-reference';
 
 
