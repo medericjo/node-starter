@@ -24,6 +24,7 @@ app.use(express.urlencoded({ extended: true })); // Permit to read URL encoded d
 app.use(
   '/api-reference',
   apiReference({
+    pageTitle: 'Node Starter API Reference',
     spec: {
       content: swaggerSpec,
     },
