@@ -1,4 +1,4 @@
-const sequelize = require('../config/database')
+import sequelize from '../config/database.js'
 
 // List all models
 const models = sequelize.models
