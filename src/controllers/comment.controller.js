@@ -6,6 +6,7 @@ exports.getComments = async (req, res) => {
 }
 
 
+
 exports.getCommentById = async (req, res) => {
   const comment = await commentService.getCommentById(req.params.id)
   res.status(200).json(comment)

@@ -2,56 +2,31 @@ const sequelize = require('../config/database')
 const { User, Post, Comment, Reply } = require('../models/index')
 
 const seedUsers = async () => {
-  const users = await Promise.all([
-    User.create({
-      name: 'John Doe',
-      email: 'john@example.com',
-    }),
-    User.create({
-      name: 'Jane Smith', 
-      email: 'jane@example.com',
-    })
+  return await User.bulkCreate([
+    { name: 'John Doe', email: 'john@example.com' },
+    { name: 'Jane Smith', email: 'jane@example.com' }
   ])
-  return users
 }
 
 const seedPosts = async (userId) => {
-  const post = await Post.create({
+  return await Post.create({
     title: 'My First Post',
     content: 'This is the content of my first post',
-    userId: userId
+    userId
   })
-  return post
 }
 
 const seedComments = async (users, postId) => {
-  const comments = await Promise.all([
-    Comment.create({
-      content: 'Great post!',
-      userId: users[0].id,
-      postId: postId
-    }),
-    Comment.create({
-      content: 'Really enjoyed reading this!',
-      userId: users[1].id, 
-      postId: postId
-    })
+  return await Comment.bulkCreate([
+    { content: 'Great post!', userId: users[0].id, postId },
+    { content: 'Really enjoyed reading this!', userId: users[1].id, postId }
   ])
-  return comments
 }
 
 const seedReplies = async (users, comments) => {
-  await Promise.all([
-    Reply.create({
-      content: 'Thanks for your comment!',
-      userId: users[0].id,
-      commentId: comments[0].id
-    }),
-    Reply.create({
-      content: 'Glad you enjoyed it!',
-      userId: users[1].id,
-      commentId: comments[1].id
-    })
+  return await Reply.bulkCreate([
+    { content: 'Thanks for your comment!', userId: users[0].id, commentId: comments[0].id },
+    { content: 'Glad you enjoyed it!', userId: users[1].id, commentId: comments[1].id }
   ])
 }
 

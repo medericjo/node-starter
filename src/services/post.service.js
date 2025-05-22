@@ -19,7 +19,7 @@ exports.getPostById = async id => {
       {
         model: User,
         as: 'user',
-        attributes: ['id', 'name', 'email'],
+        attributes: ['name', 'email'],
       },
     ],
   })

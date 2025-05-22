@@ -6,17 +6,17 @@ exports.getComments = async () => {
       {
         model: User,
         as: 'user',
-        attributes: ['id', 'name', 'email'],
+        attributes: ['name', 'email'],
       },
       {
         model: Post,
         as: 'post',
-        attributes: ['id', 'title'],
+        attributes: ['title'],
       },
       {
         model: Reply,
         as: 'replies',
-        attributes: ['id', 'content'],
+        attributes: ['content'],
       },
     ],
   })
@@ -29,17 +29,17 @@ exports.getCommentById = async id => {
       {
         model: Post,
         as: 'post',
-        attributes: ['id', 'title'],
+        attributes: ['title'],
       },
       {
         model: Reply,
         as: 'replies',
-        attributes: ['id', 'content'],
+        attributes: ['content'],
       },
       {
         model: User,
         as: 'user',
-        attributes: ['id', 'name', 'email'],
+        attributes: ['name', 'email'],
       },
     ],
   })

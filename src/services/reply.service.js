@@ -75,6 +75,13 @@ exports.updateReply = async (id, replyData) => {
   return this.getReplyById(reply.id)
 }
 
+/**
+ * Deletes a reply by its ID.
+ * 
+ * @param {string} id - The ID of the reply to delete.
+ * @returns {Promise<{message: string}>} A promise that resolves to an object with a success message.
+ * @throws {Error} Throws an error if the reply is not found.
+ */
 exports.deleteReply = async id => {
   const reply = await Reply.findByPk(id)
   if (!reply) {
