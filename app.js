@@ -5,10 +5,6 @@ import dotenv from 'dotenv';
 import { swaggerSpec } from './swagger.js';
 import { apiReference } from '@scalar/express-api-reference';
 
-
-// Custom middleware
-import { customMiddleware } from './src/middlewares/custom.middleware.js';
-
 // Routes
 import userRoutes from './src/routes/user.route.js';
 
@@ -30,8 +26,6 @@ app.use(
     },
   })
 );
-
-app.use(customMiddleware);
 
 // Routes
 app.use('/api/users', userRoutes);
