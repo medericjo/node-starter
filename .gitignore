@@ -6,6 +6,9 @@
 /temp
 /cache
 
+
 .env
+.DS_Store
+.vscode
 
 /src/database/database.sqlite

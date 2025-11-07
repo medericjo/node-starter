@@ -1,7 +1,5 @@
-const sequelize = require('../config/database')
-
-// List all models
-const models = sequelize.models
+import sequelize from '../config/database.js'
+import '../models/index.js';
 
 // Sync the models with the database
 // In production, use { alter: false } or remove alter option to prevent automatic schema changes
